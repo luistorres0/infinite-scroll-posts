@@ -48,6 +48,23 @@ function showLoading() {
   }, 1000);
 }
 
+// Filter posts by input
+function filterPosts(e) {
+  const term = e.target.value.toLowerCase();
+  const posts = document.querySelectorAll(".post");
+
+  posts.forEach((post) => {
+    const title = post.querySelector(".post-title").innerText.toLowerCase();
+    const body = post.querySelector(".post-body").innerText.toLowerCase();
+
+    if (title.indexOf(term) > -1 || body.indexOf(term) > -1) {
+      post.style.display = "flex";
+    } else {
+      post.style.display = "none";
+    }
+  });
+}
+
 // Show initial posts
 showPosts();
 
@@ -59,3 +76,5 @@ window.addEventListener("scroll", () => {
     showLoading();
   }
 });
+
+filter.addEventListener("input", filterPosts);
